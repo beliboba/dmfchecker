@@ -15,8 +15,9 @@ options.add_experimental_option('excludeSwitches', ['enable-logging'])
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 
-async def checker(url: str, fileout: str):
+async def checker(url: str, fileout: str, proxy: str):
 	print(Panel.fit(f"[blue]Проверяю ссылку {url}[/]"))
+	options.add_argument(f'--proxy-server={proxy}')
 	driver.get(url)
 	try:
 		driver.find_element(By.XPATH, '//*[@id="filelist"]/noindex/a')
