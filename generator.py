@@ -8,18 +8,25 @@ from rich import print
 from rich.panel import Panel
 
 
-async def generate():
-	print(Panel.fit("[green]Генерирую ссылки. Вывод: links.txt[/]"))
+async def dmf_generate():
+	print(Panel.fit("[green]Генерирую ссылки. Вывод: dmf_links.txt[/]"))
 	generatedlinks=0
-	async with aiofiles.open('links.txt', 'a+') as f:
-		for word in itertools.product(string.ascii_letters, repeat=5):
+	async with aiofiles.open('dmf_links.txt', 'a+') as f:
+		for word in itertools.product(string.ascii_letters + string.digits, repeat=5):
 			if 'https://dropmefiles.com/' + ''.join(word) + '\n' not in await f.readlines():
 				await f.write('https://dropmefiles.com/' + ''.join(word) + '\n')
 				generatedlinks += 1
-			else:
-				pass
-			print(f"Сгенерировано ссылок: {generatedlinks}")
+				print(f"Сгенерировано ссылок: {generatedlinks}")
 			os.system('cls')
 
 
-asyncio.run(generate())
+async def yd_generate():
+	print(Panel.fit("[green]Генерирую ссылки. Вывод: yd_links.txt[/]"))
+	generatedlinks = 0
+	async with aiofiles.open('yd_links.txt', 'a+') as f:
+		for word in itertools.product(string.ascii_letters + string.digits, repeat=14):
+			if 'https://disk.yandex.ru/d/' + ''.join(word) + '\n' not in await f.readlines():
+				await f.write('https://disk.yandex.ru/d/' + ''.join(word) + '\n')
+				generatedlinks += 1
+				print(f"Сгенерировано ссылок: {generatedlinks}")
+			os.system('cls')
